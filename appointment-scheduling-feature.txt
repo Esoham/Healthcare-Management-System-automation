@@ -1,0 +1,25 @@
+Feature: Appointment Scheduling
+
+  Scenario: Successful appointment scheduling
+    Given I am on the appointment scheduling page
+    When I enter the following appointment details:
+      | Patient ID | Doctor ID | Date       | Time     | Type       |
+      | P12345     | D67890    | 2024-09-01 | 14:30:00 | Check-up   |
+    And I click the schedule button
+    Then I should see an appointment confirmation message
+
+  Scenario: Appointment scheduling with unavailable time slot
+    Given I am on the appointment scheduling page
+    When I enter the following appointment details:
+      | Patient ID | Doctor ID | Date       | Time     | Type       |
+      | P12345     | D67890    | 2024-09-01 | 10:00:00 | Check-up   |
+    And I click the schedule button
+    Then I should see a message indicating the time slot is unavailable
+
+  Scenario: Appointment scheduling with invalid patient ID
+    Given I am on the appointment scheduling page
+    When I enter the following appointment details:
+      | Patient ID | Doctor ID | Date       | Time     | Type       |
+      | INVALID    | D67890    | 2024-09-01 | 11:00:00 | Check-up   |
+    And I click the schedule button
+    Then I should see an error message for invalid patient ID

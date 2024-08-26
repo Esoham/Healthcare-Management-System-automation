@@ -1,0 +1,25 @@
+Feature: Billing
+
+  Scenario: Successful bill generation
+    Given I am on the billing page
+    When I enter the following billing details:
+      | Patient ID | Service Code | Amount | Date       | Payment Method |
+      | P12345     | SC001        | 150.00 | 2024-09-01 | Credit Card    |
+    And I click the generate bill button
+    Then I should see a bill generation confirmation message
+
+  Scenario: Bill generation with invalid service code
+    Given I am on the billing page
+    When I enter the following billing details:
+      | Patient ID | Service Code | Amount | Date       | Payment Method |
+      | P12345     | INVALID      | 150.00 | 2024-09-01 | Credit Card    |
+    And I click the generate bill button
+    Then I should see an error message for invalid service code
+
+  Scenario: Bill generation with negative amount
+    Given I am on the billing page
+    When I enter the following billing details:
+      | Patient ID | Service Code | Amount  | Date       | Payment Method |
+      | P12345     | SC001        | -50.00  | 2024-09-01 | Credit Card    |
+    And I click the generate bill button
+    Then I should see an error message for invalid amount

@@ -1,0 +1,25 @@
+Feature: Electronic Health Record (EHR) Management
+
+  Scenario: Successful EHR record creation
+    Given I am on the EHR management page
+    When I enter the following EHR details:
+      | Patient ID | Record Type | Date       | Details                           |
+      | P12345     | Lab Result  | 2024-09-01 | Blood test results: All normal    |
+    And I click the add record button
+    Then I should see a record creation confirmation message
+
+  Scenario: EHR record creation with invalid patient ID
+    Given I am on the EHR management page
+    When I enter the following EHR details:
+      | Patient ID | Record Type | Date       | Details                           |
+      | INVALID    | Lab Result  | 2024-09-01 | Blood test results: All normal    |
+    And I click the add record button
+    Then I should see an error message for invalid patient ID
+
+  Scenario: EHR record creation with future date
+    Given I am on the EHR management page
+    When I enter the following EHR details:
+      | Patient ID | Record Type | Date       | Details                           |
+      | P12345     | Lab Result  | 2025-01-01 | Blood test results: All normal    |
+    And I click the add record button
+    Then I should see an error message for invalid date
