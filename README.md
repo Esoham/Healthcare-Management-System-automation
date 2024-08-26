@@ -1,6 +1,4 @@
 # Healthcare-Management-System-automation
-# Healthcare Management System Automation
-
 This project provides an automation framework for testing a healthcare management system. It covers various aspects including patient registration, appointment scheduling, billing, and electronic health records (EHR) management.
 
 ## Features
